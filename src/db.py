@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session
 import os
 
 db_user = os.getenv("DB_USER", "vlp")
@@ -12,10 +12,12 @@ SQLALCHEMY_DATABASE_URL = f"postgresql://{db_user}:{db_pass}@{db_host}:{db_port}
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
-    connect_args={
-        "check_same_thread": False
-    }
 )
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+
+def get_session():
+    with Session(autocommit=False, autoflush=False, bind=engine) as session:
+        yield session
+
 
 Base = declarative_base()

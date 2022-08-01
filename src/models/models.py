@@ -1,3 +1,4 @@
+import uuid
 from typing import List
 
 from pydantic import BaseModel, Field, confloat, conlist, validator
