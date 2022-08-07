@@ -8,8 +8,10 @@ main_router = APIRouter(prefix="/vlp", tags=["VLP"])
 
 
 @main_router.post("/calc", response_model=VlpCalcResponse)
-def calc_vlp(vlp_in: VlpCalcRequest, session=Depends(get_session)):
+def calc_vlp(vlp_in: VlpCalcRequest):
     """Расчёт VLP по исходным данным и сохранение в Базу"""
+    session = get_session()
+
     init_data_id = save_init_data(session, vlp_in.dict())
 
     vlp_result = vlp_calculation(**vlp_in.dict())
@@ -19,13 +21,17 @@ def calc_vlp(vlp_in: VlpCalcRequest, session=Depends(get_session)):
     return VlpCalcResponse.parse_obj(vlp_result)
 
 
-@main_router.get('/get-vlp-id-by-depth')
-def get_vlp():
+@main_router.get('/get-vlp/depth/up-{depth}')
+def get_vlp_id_by_depth(depth: float):
     """Вернуть все VLP ID больше глубины скважины по возрастанию глубины"""
-    pass
+    session = get_session()
+    vlp_ids = queries.get_vlp_ids(session, depth)
+    return vlp_ids
 
 
-@main_router.get('/get-vlp-by-id')
-def get_vlp():
+@main_router.get('/get-vlp/depth/{vlp_id}')
+def get_vlp_by_id(vlp_id):
     """Вернуть VLP по ID"""
-    pass
+    session = get_session()
+    vlp = queries.get_vlp_by_id(session, vlp_id)
+    return vlp

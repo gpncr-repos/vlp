@@ -30,3 +30,15 @@ def save_vlp_data(session, vlp, init_data_id):
     session.add(vlp)
     session.commit()
     return vlp.id
+
+
+def get_vlp_ids(session, depth):
+    vlp_ids = session.query(VLP.id). \
+        join(WellData, VLP.data_id == WellData.id).filter(
+        WellData.h_res >= depth).order_by(WellData.h_res).all()
+    return vlp_ids
+
+
+def get_vlp_by_id(session, vlp_id):
+    vlp = session.query(VLP.vlp).filter(VLP.id == vlp_id).first()
+    return vlp
