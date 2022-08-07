@@ -16,8 +16,7 @@ engine = create_engine(
 
 
 def get_session():
-    with Session(autocommit=False, autoflush=False, bind=engine) as session:
-        yield session
+    return Session(autocommit=False, autoflush=False, bind=engine)
 
 
 Base = declarative_base()
