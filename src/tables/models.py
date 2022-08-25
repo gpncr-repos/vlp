@@ -1,6 +1,6 @@
 import uuid
 
-from sqlalchemy import Column, ForeignKey, JSON, Float
+from sqlalchemy import Column, ForeignKey, JSON, Float, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
 from src.db import Base
@@ -9,7 +9,7 @@ from src.db import Base
 class WellData(Base):
     __tablename__ = "well_data"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
+    id = Column(String, primary_key=True)
     inclinometry = Column(JSON, comment="Инклинометрия")
     d_cas = Column(Float, comment="Диаметр ЭК, м")
     d_tub = Column(Float, comment="Диаметр НКТ, м")
@@ -32,6 +32,6 @@ class VLP(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
     vlp = Column(JSON, comment="VLP")
-    data_id = Column(UUID(as_uuid=True), ForeignKey("well_data.id"))
+    well_id = Column(String, ForeignKey("well_data.id"))
 
     data = relationship("WellData", back_populates="vlp")
