@@ -1,8 +1,3 @@
-from dataclasses import Field
-from typing import List
-
-from pydantic import confloat, validator
-
 from src.db import Base
 import sqlalchemy as sa
 
