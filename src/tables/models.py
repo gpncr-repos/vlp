@@ -4,22 +4,21 @@ import sqlalchemy as sa
 
 class WellData(Base):
     __tablename__ = "well_data"
-
-    id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
-    MD = sa.Column(sa.String,  comment="")
-    TVD = sa.Column(sa.String)
-    d_casing = sa.Column(sa.Float)
-    d_tubing = sa.Column(sa.Float)
-    h_mes_tubing = sa.Column(sa.Float)
-    wct = sa.Column(sa.Integer)
-    rp = sa.Column(sa.Integer)
-    gamma_oil = sa.Column(sa.Float)
-    gamma_gas = sa.Column(sa.Float)
-    gamma_wat = sa.Column(sa.Float)
-    t_res = sa.Column(sa.Integer)
-    p_wh = sa.Column(sa.Integer)
-    geo_grad = sa.Column(sa.Integer)
-    h_res = sa.Column(sa.Integer)
+    id = sa.Column(sa.Integer, primary_key=True, autoincrement=True, comment="")
+    MD = sa.Column(sa.String,  comment="Измеренная по стволу глубина,м")
+    TVD = sa.Column(sa.String, comment="Вертикальная глубина,м")
+    d_casing = sa.Column(sa.Float, comment="Данные по ЭК")
+    d_tubing = sa.Column(sa.Float, comment="Данные по МКТ")
+    h_mes_tubing = sa.Column(sa.Float,comment="Глубина спуска МКТ, м")
+    wct = sa.Column(sa.Integer,comment="Обводненность, %")
+    rp = sa.Column(sa.Integer,comment="Газовый фактор,м3/т")
+    gamma_oil = sa.Column(sa.Float,comment="Относительная плотность нефти")
+    gamma_gas = sa.Column(sa.Float,comment="Относительная плотность газа ")
+    gamma_wat = sa.Column(sa.Float,comment="Относительная плотность воды")
+    t_res = sa.Column(sa.Integer,comment="Пластовая температура, С")
+    p_wh = sa.Column(sa.Integer,comment="Буферное давление, атм")
+    geo_grad = sa.Column(sa.Integer,comment="Градиент температуры, C/100 м")
+    h_res = sa.Column(sa.Integer,comment="Глубина Верхних Дыр Перфорации, м")
 
 
 class VLP(Base):

@@ -15,7 +15,7 @@ def get_check_well_data_exists(session, well_data_hash):
     return well_id
 
 
-def save_init_data(session, init_data):
+def save_well_data(session, init_data):
     well_data = WellData(
 
     MD=init_data.inclinometry.MD,
@@ -63,10 +63,10 @@ def get_check_vlp_exists(session, well_id):
     """
     vlp = session.query(VLP.vlp).filter(VLP.well_id == well_id).scalar()
     return vlp
-def save_vlp_data(session, vlp, init_data_id):
-    vlp = VLP(
-        vlp=vlp,
-        well_id=init_data_id
-    )
+def save_vlp_data(session, init_data):
+    q_liq = str(init_data["q_liq"])
+    p_wf = str(init_data["p_wf"])
+    vlp = VLP(q_liq=q_liq,
+              p_wf=p_wf)
     session.add(vlp)
     session.commit()
