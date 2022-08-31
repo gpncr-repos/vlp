@@ -1,4 +1,4 @@
-import src.routes as rts
+import routes as rts
 import uvicorn
 from fastapi import FastAPI
 
