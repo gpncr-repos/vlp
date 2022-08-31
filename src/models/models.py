@@ -26,7 +26,6 @@ class PVT(BaseModel):
     gamma_wat: confloat(ge=0.98, le=1.2) = Field(title="Отн. плотность воды")
     t_res: confloat(ge=10, le=500) = Field(title="Пластовая температура, C")
 
-
 class VlpCalcRequest(BaseModel):
     inclinometry: Inclinometry = Field(title="Инклинометрия")
     casing: Pipeline = Field(title="Данные по ЭК")
@@ -64,7 +63,7 @@ class VlpCalcRequest(BaseModel):
             }
         }
 
-
+'''Тело ответа на запрос'''
 class VlpCalcResponse(BaseModel):
     q_liq: List[confloat(ge=0)] = Field(title="Дебиты жидкости, м3/сут")
     p_wf: List[confloat(gt=0)] = Field(title="Забойное давление, атм")

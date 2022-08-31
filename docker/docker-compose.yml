@@ -11,3 +11,5 @@ services:
       POSTGRES_PASSWORD: superuser
     ports:
       - "5432:5432"
+volumes:
+  postgresql:
