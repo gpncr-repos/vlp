@@ -18,7 +18,6 @@ def calc_vlp(vlp_in: VlpCalcRequest):
         vlp = get_check_vlp_exists(session, str(hash(str(vlp_in))))
         return VlpCalcResponse.parse_raw(vlp)
 
-    print(vlp_in.dict()["casing"]["d"])
     save_init_data(session, vlp_in.dict(), str(hash(str(vlp_in))))
     result = vlp_calculation(vlp_in.inclinometry.dict(),
                     vlp_in.casing.dict(),
