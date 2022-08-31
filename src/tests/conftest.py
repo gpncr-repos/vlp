@@ -1,6 +1,7 @@
 import pytest
 import mock
 from fastapi.testclient import TestClient
+from src.tables.models import WellData
 
 from src.main import app
 from src.db import get_session
@@ -19,3 +20,4 @@ def sa_session():
 
     session.rollback()
     session.close()
+    session.query(WellData).all()
