@@ -1,5 +1,5 @@
 from src.tables.models import WellData, VLP
-
+import json
 
 def get_check_well_data_exists(session, well_data_hash):
     """
@@ -28,7 +28,7 @@ def get_check_vlp_exists(session, well_id):
 def save_init_data(session, init_data, well_data_id):
     well_data = WellData(
         id=well_data_id,
-        inclinometry=init_data["inclinometry"],
+        inclinometry=str(init_data["inclinometry"]),
         d_cas=init_data["casing"]["d"],
         d_tub=init_data["tubing"]["d"],
         h_tub=init_data["tubing"]["h_mes"],
@@ -46,9 +46,10 @@ def save_init_data(session, init_data, well_data_id):
     session.commit()
 
 
-def save_vlp_data(session, vlp, init_data_id):
+def save_vlp_data(session, vlp, vlp_id, init_data_id):
     vlp = VLP(
-        vlp=vlp,
+        id=vlp_id,
+        vlp=json.dumps(vlp),
         well_id=init_data_id
     )
     session.add(vlp)
